@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+}
+
+
+
+.grid{
+    width: 200px;
+    height: 400px;
+    background: yellow;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-right: 0;
+}
+.grid div{
+    width: 18px;
+    height: 18px;
+    border :solid 1px white;
+    border-radius: 6px;
+}
+.tetrimonio{
+    background-color: rgb(54, 54, 220);
+}
+
+
+
+
+.miniGrid{
+    width :80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: yellow;
+    margin: auto;
+}
+
+.miniGrid div{
+    width: 18px;
+    height: 18px;
+    border :solid 1px white;
+    border-radius: 6px;
+}
