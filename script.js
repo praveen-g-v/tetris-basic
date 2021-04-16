@@ -1,16 +1,23 @@
 document.addEventListener("DOMContentLoaded",()=>{
+  /**
+   * Intializing the elements in the html to a variable
+   * Settinhg up the game
+   */
     const grid=document.querySelector('.grid');
     let squares=Array.from(document.querySelectorAll('.grid div'));
     const width=10;
     const displayScore=document.querySelector('#score');
-    //console.log(squares);
-    const startbtn=document.querySelector('#startbtn')
+    const DisplayHighScore=document.querySelector('#maxScore')
+    const startbtn=document.querySelector('#startbtn');
+    const restartbtn=document.querySelector('#restartbtn');
     let nextRandom=0;
     let timerId;
+    let highScore=0;
     let score=0;
-
+    let checkgameOver=false;
+    
     const lTetromino = [
-        [1, width+1, width*2+1, 2],
+        [0, width+0, width*2+0, 1],
         [width, width+1, width+2, width*2+2],
         [1, width+1, width*2+1, width*2],
         [width, width*2, width*2+1, width*2+2]
@@ -78,19 +85,27 @@ document.addEventListener("DOMContentLoaded",()=>{
       
       function control(e) {
         if(e.keyCode ==37||e.keyCode==65){
-          moveLeft();
+          if (!checkgameOver) {
+              moveLeft();
+          }
         }
         else if(e.keyCode == 38 || e.keyCode ==87){
-          rotate();
+          if (!checkgameOver) {
+              rotate();
+          }
         }
         else if(e.keyCode == 39 || e.keyCode ==68){
-           moveRight();
+          if (!checkgameOver) {
+              moveRight();
+          }
         }
         else if(e.keyCode == 40 || e.keyCode ==83){
-          moveDown();
+          if (!checkgameOver) {
+             moveDown();
+          }
         }
       }
-      document.addEventListener('keyup',control);
+      document.addEventListener('keydown',control);
 
 
 
@@ -104,7 +119,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     function moveDown() {
         undraw();
-        currentpos+=width;
+        currentpos=currentpos+= width;
         draw();
         freeze();
     }
@@ -155,6 +170,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       if(current.some(index=> squares[currentpos+index].classList.contains('taken'))){
         currentpos-=1;
       }
+      
       draw();
 
     }
@@ -164,7 +180,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     function rotate() {
       undraw();
-      currentrotation++;
+      if((currentpos%width<=7)&&(currentpos%width>=0)){
+        if((currentpos%width==7)&&(random==4)){
+          currentrotation--;
+        }
+        
+        currentrotation++;
+      }
       if(currentrotation==4){
         currentrotation=0;
       }
@@ -203,18 +225,56 @@ function displayShape() {
 
 //adding functionalities to the button
 
-startbtn.addEventListener('click',()=>{
+
+
+//play function to start the game
+function play() {
   if(timerId){
+    checkgameOver=true;
     clearInterval(timerId)
     timerId=null
+    startbtn.innerHTML="Play";
   }
   else{
+    checkgameOver=false;
+    startbtn.innerHTML="Pause";
     draw();
     timerId=setInterval(moveDown,1000);
-    nextRandom=Math.floor(Math.random()*5);
+    //nextRandom=Math.floor(Math.random()*5);
     displayShape();
     
   }
+}
+
+startbtn.addEventListener('click',()=>{
+  play();
+})
+restartbtn.addEventListener('click',()=>{
+  checkgameOver=false;
+  for(let i=0;i<200;i++){
+    squares[i].classList.remove('tetrimonio')
+    squares[i].classList.remove('taken');;
+  }
+  clearInterval(timerId);
+  timerId=null;
+  if(highScore<score){
+    highScore=score;
+  }
+  DisplayHighScore.innerHTML=highScore;
+  startbtn.innerHTML="Play";
+  score=0;
+  displayScore.innerHTML=score;
+  upNextTetrominoes[nextRandom].forEach(index =>{
+    displaySquares[displayIndex+index].classList.remove('tetrimonio')
+  })
+  nextRandom=Math.floor(Math.random()*5);
+  random=nextRandom;
+  nextRandom=Math.floor(Math.random()*5);
+  current=tetrominoes[random][currentrotation];
+  currentpos=4;
+  play();
+  
+  freeze();
 })
 
 //ading scores in the display squares
@@ -241,7 +301,12 @@ function addScore() {
 //game Over
 function gameOver() {
   if(current.some(index=>squares[currentpos+index].classList.contains('taken'))){
+    if(highScore<score){
+      highScore=score;
+    }
+    DisplayHighScore.innerHTML=highScore;
     displayScore.innerHTML="Ended  "+score;
+    checkgameOver=true;
     clearInterval(timerId);
   }
 }
@@ -279,18 +344,30 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */ 
-            moveLeft();
+            if (!checkgameOver) {
+              moveLeft();
+            }
+            
         } else {
             /* right swipe */
-            moveRight();
+            if (!checkgameOver) {
+              moveRight();
+            }
+            
         }                       
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            rotate(); 
+            if (!checkgameOver) {
+              rotate();
+            }
+             
         } else { 
             /* down swipe */
-            moveDown();
+            if (!checkgameOver) {
+              moveDown();
+            }
+            
         }                                                                 
     }
     /* reset values */

@@ -1,7 +1,9 @@
 .container{
     display: flex;
 }
-
+#maxScore{
+    margin: auto;
+}
 
 
 .grid{
@@ -23,7 +25,9 @@
     background-color: rgb(54, 54, 220);
 }
 
-
+.subContainer{
+    margin: auto;
+}
 
 
 .miniGrid{
