@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       function draw() {
           current.forEach(index =>{
-            squares[currentpos + index].classList.add('tetrimonio')
+            squares[currentpos + index].classList.add('tetrimonio');
+            
 
           });
       }
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       
       function undraw() {
         current.forEach(index =>{
-          squares[currentpos + index].classList.remove('tetrimonio')
+          squares[currentpos + index].classList.remove('tetrimonio');
  
         });
       }
@@ -118,13 +119,13 @@ document.addEventListener("DOMContentLoaded",()=>{
     //moving the tetrimonio
 
     function moveDown() {
+      freeze();
         undraw();
         currentpos=currentpos+= width;
         draw();
         freeze();
     }
 
-    // timerId=setInterval(moveDown, 1000); 
 
 
 
