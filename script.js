@@ -240,7 +240,7 @@ function play() {
     checkgameOver=false;
     startbtn.innerHTML="Pause";
     draw();
-    timerId=setInterval(moveDown,1000);
+    timerId=setInterval(moveDown,600);
     //nextRandom=Math.floor(Math.random()*5);
     displayShape();
     

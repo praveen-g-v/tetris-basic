@@ -101,6 +101,14 @@ body{
   background: #f66c7b;
   background-image: linear-gradient(top, #d25068, #f66c7b);
 }
+h2{
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    color:  #BFFF00;
+    text-shadow: 1px 1px 1px #a2c731,
+    2px 2px 1px #6d891a;
+}
 
 
   }
