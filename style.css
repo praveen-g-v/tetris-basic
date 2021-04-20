@@ -103,12 +103,10 @@ body{
 }
 
 
-
-
   }
   
   /********** Medium devices only **********/
-  @media (max-width: 700px) {
+  @media (min-width:451px) and (max-width: 700px) {
     .grid{
         width: 200px;
         height: 418px;
@@ -175,6 +173,93 @@ body{
     .button:hover {
       background: #f66c7b;
       background-image: linear-gradient(top, #d25068, #f66c7b);
+    }
+    h2{
+        text-align: center;
+        font-size: 1.5rem;
+        font-family: 'Times New Roman', Times, serif;
+        color:  #BFFF00;
+        text-shadow: 1px 1px 1px #a2c731,
+        2px 2px 1px #6d891a;
+    }
+  }
+
+  /********** Small devices only **********/
+  @media (max-width: 450px) {
+    .grid{
+        width: 152px;
+        height: 350px;
+        background: #fcff99;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        margin-right: 0;
+        margin-top: 0;
+    }
+    .grid div{
+        width: 13px;
+        height: 13px;
+        border :solid 1px white;
+        border-radius: 3px;
+    }
+    .miniGrid{
+        width :70px;
+        height: 70px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color:#fcff99;
+        margin: auto;
+    }
+    
+    .miniGrid div{
+        width: 15px;
+        height: 15px;
+        border :solid 1px white;
+        border-radius: 1px;
+    }
+    .subContainer{ 
+        justify-content: center;
+        width: 100px;
+        height: 300 px;
+        border: solid 6px #6391eb;
+        border-radius: 5px;
+        background-image: url("images/br-for-small\ div.png");
+        background-size: cover;
+        margin: auto;
+    }
+    .button{
+        position: relative;
+        width: 4rem;
+        height: 2rem;
+        text-align: center;
+        color: #fff;
+        letter-spacing: 1px;
+        text-decoration: none;
+        line-height: 13px;
+        font-size: 10px;  
+        display: block;
+        margin: 20px;
+        text-shadow: -1px -1px 0 #a84155;
+        background: #d25068;
+        border: 1px solid #d25068;
+        
+        background-image: linear-gradient(to bottom, #f66c7b, #d25068);
+        border-radius: 5px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.1) inset, 0 4px 0 #ad4257,
+          0 4px 2px rgba(0, 0, 0, 0.5);
+    }
+    .button:hover {
+      background: #f66c7b;
+      background-image: linear-gradient(top, #d25068, #f66c7b);
+    }
+    h2{
+        text-align: center;
+        font-size: 0.8rem;
+        font-family: 'Times New Roman', Times, serif;
+        color:  #BFFF00;
+        text-shadow: 1px 1px 1px #a2c731,
+        1.5px 1.5px 1px #6d891a;
     }
   }
   
