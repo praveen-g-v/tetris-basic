@@ -182,7 +182,17 @@ document.addEventListener("DOMContentLoaded",()=>{
     function rotate() {
       undraw();
       if((currentpos%width<=7)&&(currentpos%width>=0)){
+        let rotate=currentrotation+1;
+        if(rotate==4){
+          rotate=0;
+        }
+        let nextcurrent=tetrominoes[random][rotate]; 
+        console.log(currentrotation);
         if((currentpos%width==7)&&(random==4)){
+          currentrotation--;
+        }
+        else if (nextcurrent.some(index => squares[currentpos+index].classList.contains('taken'))){
+         
           currentrotation--;
         }
         
@@ -293,9 +303,18 @@ function addScore() {
       })
       const squaresRemoved=squares.splice(i,width);
       squares=squaresRemoved.concat(squares);
-      squares.forEach(cell => grid.appendChild(cell))
+      squares.forEach(cell => grid.appendChild(cell));
+      
     }
     
+  }
+  for (let i = 0; i < 199; i++) {
+    if(squares[i].classList.contains('tetrimonio')){
+      if(!squares[i].classList.contains('taken')){
+        squares[i].classList.remove('tetrimonio');
+      }
+    }
+
   }
 }
 
